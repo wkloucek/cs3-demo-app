@@ -5,6 +5,9 @@ go 1.17
 require (
 	github.com/cs3org/go-cs3apis v0.0.0-20211104090126-8e972dca8304
 	github.com/cs3org/reva v1.17.0
+	github.com/disintegration/imaging v1.6.2
+	github.com/go-chi/chi v1.5.4
+	github.com/go-chi/render v1.0.1
 	google.golang.org/grpc v1.42.0
 )
 
@@ -15,6 +18,7 @@ require (
 	go.opentelemetry.io/otel/exporters/jaeger v1.2.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.2.0 // indirect
 	go.opentelemetry.io/otel/trace v1.2.0 // indirect
+	golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8 // indirect
 	golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d // indirect
 	golang.org/x/sys v0.0.0-20210921065528-437939a70204 // indirect
 	golang.org/x/text v0.3.6 // indirect

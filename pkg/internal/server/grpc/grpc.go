@@ -1,6 +1,7 @@
-package server
+package grpc
 
 import (
+	"context"
 	"net"
 
 	appproviderv1beta1 "github.com/cs3org/go-cs3apis/cs3/app/provider/v1beta1"
@@ -8,7 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func Server() error {
+func Server(ctx context.Context) (*grpc.Server, error) {
 	opts := []grpc.ServerOption{}
 	s := grpc.NewServer(opts...)
 
@@ -18,10 +19,10 @@ func Server() error {
 
 	l, err := net.Listen("tcp", "localhost:5678")
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	s.Serve(l)
+	go s.Serve(l)
 
-	return nil
+	return s, nil
 }
