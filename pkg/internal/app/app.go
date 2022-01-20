@@ -50,7 +50,7 @@ func (app *demoApp) RegisterDemoApp(ctx context.Context) error {
 		Provider: &registryv1beta1.ProviderInfo{
 			Name:        "demoapp",
 			Description: "this is an demo app",
-			Icon:        "",
+			Icon:        "image-edit",
 			Address:     "127.0.0.1:5678", // address of the http server we start in this demo app
 			MimeTypes: []string{
 				// supported mime types
