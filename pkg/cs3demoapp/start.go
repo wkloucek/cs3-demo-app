@@ -4,33 +4,27 @@ import (
 	"context"
 	"time"
 
-	"github.com/cs3org/reva/pkg/rgrpc/todo/pool"
-	"github.com/wkloucek/cs3-demo-app/pkg/internal/register"
-	"github.com/wkloucek/cs3-demo-app/pkg/internal/server/grpc"
-	"github.com/wkloucek/cs3-demo-app/pkg/internal/server/http"
+	"github.com/wkloucek/cs3-demo-app/pkg/internal/app"
 )
 
 func Start() error {
 	ctx := context.Background()
 
-	gwc, err := pool.GetGatewayServiceClient("localhost:9142")
-	if err != nil {
+	app := app.New()
+
+	if err := app.GetCS3apiClient(); err != nil {
 		return err
 	}
 
-	err = register.Register(ctx, gwc)
-	if err != nil {
+	if err := app.RegisterDemoApp(ctx); err != nil {
 		return err
 	}
 
-	grpcServer, err := grpc.Server(ctx)
-	if err != nil {
+	if err := app.GRPCServer(ctx); err != nil {
 		return err
 	}
-	defer grpcServer.GracefulStop()
 
-	_, err = http.Server(ctx, gwc)
-	if err != nil {
+	if err := app.HTTPServer(ctx); err != nil {
 		return err
 	}
 
