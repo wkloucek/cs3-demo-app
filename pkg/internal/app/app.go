@@ -51,7 +51,7 @@ func (app *demoApp) RegisterDemoApp(ctx context.Context) error {
 			Name:        "demoapp",
 			Description: "this is an demo app",
 			Icon:        "image-edit",
-			Address:     "127.0.0.1:5678", // address of the http server we start in this demo app
+			Address:     "127.0.0.1:5678", // address of the grpc server we start in this demo app
 			MimeTypes: []string{
 				// supported mime types
 				"image/png",
@@ -67,7 +67,7 @@ func (app *demoApp) RegisterDemoApp(ctx context.Context) error {
 	}
 
 	if resp.Status.Code != rpcv1beta1.Code_CODE_OK {
-		errors.New("status code != CODE_OK")
+		return errors.New("status code != CODE_OK")
 	}
 
 	return nil
@@ -178,6 +178,7 @@ func PictureHandler(app *demoApp, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// serve the file
+	// normally you would return some proper html
+	// but we will just return the image here
 	w.Write(buf.Bytes())
 }
